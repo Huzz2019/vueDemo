@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自定义vue指令</title>
+	</head>
+	<body>
+		<div id="div1">
+			<h1>自定义全局指令</h1>
+			<p v-upper-text="msg"></p>
+			<hr >
+			<h3>原文</h3>
+			<p v-text="msg"></p>
+		</div>
+		<hr >
+		<div id="div2">
+			<h1>自定义局部指令</h1>
+			<p v-lower-text="msg2"></p>
+			<p v-upper-lower-text="msg2"></p>
+			<hr >
+			<h3>原文</h3>
+			<p v-text="msg2"></p>
+		</div>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义全局指令
+			//el:指令属性所在的标签对象
+			// binding：包含指令相关信息数据的对象
+			Vue.directive("upper-text",function(el,binding){
+				console.log(el,binding);
+				el.textContent = binding.value.toUpperCase();
+			})
+			new Vue({
+				el:'#div1',
+				data:{
+					msg:'I like pink!'
+				}
+			})
+			new Vue({
+				el:"#div2",
+				data:{
+					msg2:'My favorite Deng Lun !'
+				},
+				directives:{//局部指令，只对对应的模块起作用
+					'lower-text'(el,binding){
+						el.textContent = binding.value.toLowerCase();
+					},
+					'upper-lower-text'(el,binding){
+						let words = binding.value.split(" ");
+						let newValue = "";
+						for (let i = 0; i < words.length; i++) {
+							newValue += words[i].substring(0,1).toUpperCase()+words[i].substring(1,words[i].legth).toLowerCase()+" ";
+						}
+						el.textContent = newValue;
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
