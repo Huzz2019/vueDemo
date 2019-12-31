@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			input{
+				width: 200px;
+				height: 25px;
+				border: 1px solid black;
+				border-radius: 20px;
+				margin-bottom: 5px;
+				text-indent: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app1">
+			姓：<input type="text" name="firstName" v-model="firstName"/><br>
+			名：<input type="text" name="lastName" v-model="lastName" /><br>
+			姓名1（单向）：<input type="text" disabled="true" name="fullName1" v-model="fullName1" /><br>
+			姓名2（单向）：<input type="text" disabled="true" name="fullName2" v-model="fullName2" /><br>
+			姓名3（双向）：<input type="text" name="fullName3" v-model="fullName3" /><br>
+		</div>
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app1 = new Vue({
+				el:'#app1',
+				data:{
+					firstName:'胡',
+					lastName:'一天',
+					fullName2:'胡一天'
+				},
+				computed:{//属性计算  
+				//什么时候执行  初始化的时候和需要计算的对象的值发生变化的时候
+					fullName1:function(){
+						return this.firstName + this.lastName;
+					},
+					fullName3:{
+						//什么是回调函数
+						// 1、你定义的
+						// 2、你没有调用
+						// 3、但是最终它执行了
+						//get方法需要读取当前属性时回调，根据相关的数据计算并返回当前属性的值
+						get(){
+							return this.firstName + this.lastName;
+						},
+						//回调函数，当属性值发生变化时回调，更新相关的属性值
+						set(value){
+							console.log(value);
+							this.firstName = value.substring(0,1);
+							this.lastName = value.substring(1,value.legnth);
+						}
+					}
+				},
+				watch:{//配置监视
+					firstName:function(value){// firstName 发生变化调用
+						this.fullName2 = value + this.lastName;
+						//this为vm对象，即app1
+					}
+				}
+			});
+			//两种监视形式
+			app1.$watch('lastName',function(value){
+				this.fullName2 = this.firstName + value;
+			})
+		</script>
+	</body>
+</html>

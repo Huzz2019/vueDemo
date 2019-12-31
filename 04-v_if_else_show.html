@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				margin: 0px 20px 0px;
+			}
+			button{
+				width: 100px;
+				height: 30px;
+				font-size: 20px;
+				text-align: center;
+				line-height: 25px;
+				border: 1px solid black;
+				border-radius: 25px;
+			}
+			p,h1{
+				margin: 10px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 
+		 可以通过F12查看v-if和v-else与v-show的区别：
+		 如img中的图04-v_if_else_show.png
+		 
+		 使用v-if和v-else的时候不显示的哪一个在页面中是不存在，被删除了，显示的时候需要重新添加
+		 使用v-show是通过样式的修改来显示或是隐藏的，元素本身还存在在页面中。
+		 因此：如一个元素需要很频繁的切换的时候最好使用v-show
+		 -->
+		<div id="app1">
+			<h1>v-if 和 v-slse的使用</h1>
+			<hr >
+			<p v-if="ok">哈哈，我赢了！</p>
+			<p v-else>哎呀！我竟然输了！呜呜呜......</p>
+			<hr ><br>
+			<h1>v-show的使用</h1>
+			<hr >
+			<p v-show="ok">哈哈哈，我找到你了！</p>
+			<p v-show="!ok">哎呀，你藏哪里去了，我找不到你......</p>
+			<hr ><br>
+			<button type="button" @click="updateShowInfo">变换</button>
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<button type="button" @click="ok=!ok">Change</button>
+		</div>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			new Vue({
+				el:'#app1',
+				data:{
+					ok:'true'
+				},
+				methods:{
+					updateShowInfo(){
+						this.ok = !this.ok;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

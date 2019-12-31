@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>使用vue的第一天</title>
+	</head>
+	<body >
+		<div id="app1">
+			<input type="text" v-model="message"/>
+			<p>Hello {{message}} !</p>
+		</div>
+		
+		
+	<script src="./js/vue.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var app1 = new Vue({
+		  el: '#app1',
+		  data: {
+		    message: '胡一天'
+		  }
+		})；
+		// MVVM
+		// m:model  模型，数据对象（data）
+		// v:view  视图，模板页面
+		// vm:viewModel  视图模型（Vued的实例）
+	</script>
+	</body>
+</html>

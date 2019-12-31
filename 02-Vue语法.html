@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			button{
+				border: 1px solid black;
+				border-radius: 20px;
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app1">
+			<h1>双括号表达式</h1>
+			<hr >
+			<p>{{msg}}</p>
+			<p>{{msg.toUpperCase()}}</p>
+			<p v-text="url"></p>
+			<p v-html="url"></p>
+			<hr >
+			<h1>指令一：强制数据绑定</h1>
+			<hr >
+				<img src="imgUrl" >
+				<br>
+				<img v-bind:src="imgUrl" >
+				<br>
+				<img :src="imgUrl2" >
+			<hr >
+			<h1>指令二：绑定事件监听</h1>
+			<hr >
+				<button type="button" v-on:click="test">点击</button>
+				<button type="button" @click="test2(msg+' King')">点击</button>
+			<hr >
+		</div>
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app1 = new Vue({
+				el : '#app1',
+				data:{
+					msg:'Hello!',
+					url:'<a href="https://cn.vuejs.org">Vue</a>',
+					imgUrl:'img/01.jpeg',
+					imgUrl2:'https://cn.vuejs.org/images/logo.png'
+				},
+				methods:{
+					test(){
+						alert("你好，胡一天！");
+					},
+					test2(msg){
+						alert(msg);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

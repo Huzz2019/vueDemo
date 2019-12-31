@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				margin:0px 20px;
+			}
+		</style>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<body>
+		<div id="app1">
+			<h1>v-for遍历数组</h1>
+			<ul>
+				<li v-for="(star,index) in starList">
+					{{index}}---- {{star.name}}---- {{star.age}}----
+					<button class="btn02" type="button" @click="deleteInfo(index)">delete</button>
+					
+				</li>
+			</ul>
+			newName:<input type="text" v-model="newName"/><br>
+			newAge:<input type="text" v-model="newAge"/><br>
+			<button class="btn01" type="button" @click="updateInfo(newName,newAge)">update</button>
+		</div>
+		
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			new Vue({
+				el:'#app1',
+				data:{
+					starList:[
+						{name:'王俊凯',age:19},
+						{name:'邓伦',age:24},
+						{name:'胡一天',age:23},
+						{name:'张彬彬',age:24}
+					],
+					newName:'',
+					newAge:''
+				},
+				methods:{
+					deleteInfo(index){
+						//splice(index,num)-->index为要删除数据的下标，num是从该下标（index）开始删除几个数据
+						this.starList.splice(index,1);
+						//splice(index,num,newValue);-->newValue是一个新的对象，使用该方法可以将旧数据修改为新的
+						// this.starList.splice(index,1,{name:'张彬彬',age:24});
+					},
+					updateInfo(newName,newAge){
+						this.starList.push({name:newName,age:newAge})
+						this.newName = "";
+						this.newAge = "";
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
